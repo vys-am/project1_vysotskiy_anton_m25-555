@@ -10,13 +10,13 @@ ROOMS = {
     },
     'hall': {
         'description': 'Большой зал с эхом. По центру стоит пьедестал с запечатанным сундуком.', # noqa: E501
-        'exits': {'south': 'entrance', 'west': 'library', 'north': 'treasure_room', 'east': 'corridor'}, # noqa: E501
+        'exits': {'south': 'entrance', 'west': 'library', 'north': 'treasure_room'}, # noqa: E501
         'items': [],
         'puzzle': ('На пьедестале надпись: "Назовите число, которое идет после девяти". Введите ответ цифрой или словом.', '10') # noqa: E501
     },
     'trap_room': {
           'description': 'Комната с хитрой плиточной поломкой. На стене видна надпись: "Осторожно — ловушка".', # noqa: E501
-          'exits': {'west': 'entrance', 'north': 'corridor'},
+          'exits': {'west': 'entrance'},
           'items': ['rusty_key'],
           'puzzle': ('Система плит активна. Чтобы пройти, назовите слово "шаг" три раза подряд (введите "шаг шаг шаг")', 'шаг шаг шаг') # noqa: E501
     },
@@ -28,7 +28,7 @@ ROOMS = {
     },
         'armory': {
           'description': 'Старая оружейная комната. На стене висит меч, рядом — небольшая бронзовая шкатулка.', # noqa: E501
-          'exits': {'south': 'library'},
+          'exits': {'south': 'library', 'north': 'corridor'},
           'items': ['sword', 'bronze_box'],
           'puzzle': None
     },
@@ -41,14 +41,20 @@ ROOMS = {
     # Мои комнаты:
     'corridor': {
         'description': 'Вы в длинном коридоре. Стены украшены гобеленами и картинами с изображениями предков лорда.', # noqa: E501
-        'exits': {'west': 'hall', 'south': 'trap_room', 'east': 'bedroom'},
+        'exits': {'south': 'armory', 'east': 'bedroom'},
         'items': ['old_armor'],
         'puzzle': None
     },
     'bedroom': {
         'description': 'Вы в покоях лорда. В комнате стоит письменный стол, кровь и огромный камин излучающий приятное тепло.', # noqa: E501
-        'exits': {'west': 'corridor'},
+        'exits': {'west': 'corridor', 'south': 'beautiful_room'},
         'items': ['old_note'],
+        'puzzle': None
+    },
+    'beautiful_room': {
+        'description': 'Вы попали в изысканную позолоченную комнату, хранящую призрачные тайны веков...', # noqa: E501
+        'exits': {'west': 'trap_room'},
+        'items': ['treasure_key'],
         'puzzle': None
     }
 }
@@ -82,8 +88,8 @@ COMMANDS = {
 }
 
 # Константы с параметрами для случайных событий
-EVENT_PROBABILITY = 10
-EVENT_COUNT = 2
+EVENT_PROBABILITY = 14
+EVENT_COUNT = 6
 EVENT_INTENSIVITY = 4
 TRAP_DMG_PROBABILITY = 9
 BEAST_DMG_PROBABILITY = 8

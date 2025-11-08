@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
-# labyrinth_game/main.py
+#labyrinth_game/main.py
 
-from .player_actions import get_input, show_inventory, move_player, take_item, use_item
-from .utils import (  # noqa: E501
-    attempt_open_treasure,
-    describe_current_room,
-    show_help,
-    solve_puzzle,
-)
-#
+from .player_actions import get_input, move_player, show_inventory, take_item, use_item
+from .utils import attempt_open_treasure, describe_current_room, show_help, solve_puzzle
+
 
 # Функция обработки команд
 def process_command(game_state: dict, command: str) -> None:

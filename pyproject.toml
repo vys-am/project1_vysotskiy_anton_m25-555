@@ -1,0 +1,35 @@
+[project]
+name = "poetry-demo3"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Tony Visa",email = "visotskiy.a@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "labyrinth_game", from = "."}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+project = "labyrinth_game.main:main" 
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+exclude = ["venv", ".venv", "dist", "__pycache__"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = []
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.14.4,<0.15.0)"
+]

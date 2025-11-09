@@ -1,21 +1,23 @@
 # labyrinth_game/utils.py
 
+# Импорт библиотеки
 import math as ma
 
 # Обозначаем куда смотреть внутри наших файлов
 from .constants import (
-    NUMBERS,
-    ROOMS, 
     BEAST_DMG_PROBABILITY,
-    COMMANDS,
     EVENT1_DEATH_DMG,
     EVENT2_DEATH_DMG,
     EVENT_COUNT,
     EVENT_INTENSIVITY,
     EVENT_PROBABILITY,
+    NUMBERS,
+    ROOMS,
     TRAP_DMG_PROBABILITY,
 )
 
+
+# Готовые команды для хелпа
 def show_help():
     print("\nДоступные команды:")
     print("  go <direction>  - перейти в направлении (north/south/east/west)")
@@ -34,14 +36,14 @@ def describe_current_room(game_state: dict) -> None:
     game_state - текущее состояние игры
     '''
 
-    print(f"\n== {game_state["current_room"].upper()} ==")
+    print(f"\n== {game_state['current_room'].upper()} ==")
 
     if len(ROOMS[game_state["current_room"]]["items"]) > 0:
-        print(f"Предметы в комнате: {", ".join(ROOMS[game_state["current_room"]]["items"])}") # noqa: E501
+        print(f"Предметы в комнате: {', '.join(ROOMS[game_state['current_room']]['items'])}") # noqa: E501
     else:
         print("В комнате нет полезных предметов.")
 
-    print(f"Выходы: {", ".join([i + " - " + ROOMS[game_state["current_room"]]["exits"][i] for i in ROOMS[game_state["current_room"]]["exits"]])}") # noqa: E501
+    print(f"Выходы: {', '.join([i + ' - ' + ROOMS[game_state['current_room']]['exits'][i] for i in ROOMS[game_state['current_room']]['exits']])}") # noqa: E501
 
     if not ROOMS[game_state["current_room"]]["puzzle"]:
         print("Загадок здесь нет.")
@@ -72,7 +74,7 @@ def solve_puzzle(game_state: dict) -> None:
             elif game_state["current_room"] == "library":
                 game_state["player_inventory"].append("big_book")
           
-            print(f"Ваша награда: {game_state["player_inventory"][-1]}")
+            print(f"Ваша награда: {game_state['player_inventory'][-1]}")
           
         else:
             
@@ -89,16 +91,10 @@ def attempt_open_treasure(game_state: dict) -> None:
     '''
     game_state - текущее состояние игры
     '''
-    # Получаем название текущей комнаты из состояния игры
-    current_room_name = game_state["current_room"]
-    
-    # Получаем детали текущей комнаты (предмет)
-    current_room_details = ROOMS[current_room_name]["items"]
-
     if "treasure_key" in game_state["player_inventory"]:
         print("Вы применяете ключ, и замок щёлкает. Сундук открыт!")
-        current_room_details.remove("treasure_chest")
-        print(f"В сундуке сокровище! Вы победили за {game_state["steps_taken"]} шагов!")
+#        ROOMS[game_state["current_room"]]["items"].remove("treasure_chest")
+        print(f"В сундуке сокровище! Вы победили за {game_state['steps_taken']} шагов!") # noqa: E501
         game_state["game_over"] = True
 
     else:
@@ -109,11 +105,11 @@ def attempt_open_treasure(game_state: dict) -> None:
 
             if users_code == ROOMS[game_state["current_room"]]["puzzle"][1]:
                 print("Вы правильно вводите код, и замок щёлкает. Сундук открыт!")
-                print(f"В сундуке сокровище! Вы победили за {game_state["steps_taken"]} шагов!")
+                print(f"В сундуке сокровище! Вы победили за {game_state['steps_taken']} шагов!") # noqa: E501
                 game_state["game_over"] = True
 
             else:
-                print("Стены задрожали, весь замок ходит ходуном, где-то в стенах вы слышите: 'За дверью девять душ, твоя — следующая...'. Сундук остался заперт, попробуйте еще раз.")
+                print("Стены задрожали, весь замок ходит ходуном, где-то в стенах вы слышите: 'За дверью девять душ, твоя — следующая...'. Сундук остался заперт, попробуйте еще раз.") # noqa: E501
 
         else:
             print("Вы отступаете от сундука.")
@@ -206,7 +202,7 @@ def random_event(game_state: dict) -> None:
 
         elif rng_event_number == 1:
 
-            print("Вы слышите шорох в темном углу комнаты. Ваш пульс заметно учащается.")
+            print("Вы слышите шорох в темном углу комнаты. Ваш пульс заметно учащается.") # noqa: E501
             if "sword" in game_state["player_inventory"]:
                 print("Вы обнажаете свой меч. Существо с гортанным рыком пятится назад и скрывается темноте.") # noqa: E501
 
@@ -225,7 +221,7 @@ def random_event(game_state: dict) -> None:
                         game_state["game_over"] = True
 
                 else:
-                    print("Существо прыгает в вашу сторону, но вам везет, и оно промахивается.")
+                    print("Существо прыгает в вашу сторону, но вам везет, и оно промахивается.") # noqa: E501
                     print("После чего скрывается во тьме.")
 
         elif rng_event_number == 2:
@@ -233,7 +229,4 @@ def random_event(game_state: dict) -> None:
             if game_state["current_room"] == "trap_room" and ("torch" not in game_state["player_inventory"]): # noqa: E501
                 trigger_trap(game_state=game_state)
 
-
-
-
-
+# Конец

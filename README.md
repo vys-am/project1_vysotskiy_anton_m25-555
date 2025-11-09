@@ -27,4 +27,4 @@
 
 ## Запись asciinema
 
-[![Demo](link.svg)](link(wo_svg))
+[![asciicast](https://asciinema.org/a/64yY63i1tyFKZkJ2dFM7EGgBs.svg)](https://asciinema.org/a/64yY63i1tyFKZkJ2dFM7EGgBs)

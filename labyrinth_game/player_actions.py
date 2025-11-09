@@ -2,11 +2,7 @@
 
 # Обозначаем куда смотреть внутри наших файлов
 from .constants import ROOMS
-from .utils import (
-    describe_current_room,
-    get_subject_form_in_inventory,
-    random_event,
-)
+from .utils import describe_current_room, get_subject_form_in_inventory, random_event
 
 
 #Создаем функцию отображения инвентаря
